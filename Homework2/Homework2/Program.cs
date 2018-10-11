@@ -44,21 +44,36 @@ namespace Homework2
                         throw new ArgumentOutOfRangeException(nameof(args), "Unknown source flag");
                 }
             }
+            
             transposing.Transpose(input);
+            var employeeReport = transposing.employees;
+            var paymentReport = transposing.payments;
+            var joinQuery =
+                from e in employeeReport
+                join p in paymentReport on e.Id equals p.Key
+                select new
+                {
+                    e.Id,
+                    e.FirstName,
+                    e.LastName,
+                    p.Value
+                };
+      
 
         }
 
        public class DataTransposing
         {
+            public List<Employee> employees = new List<Employee>();
+            public Dictionary<int, ICollection<Payment>> payments = new Dictionary<int, ICollection<Payment>>();
             public void Transpose(string input)
             {
                 var records = input.Split(';');
-                var employees = new List<Employee>();
-                var payments = new Dictionary<int, ICollection<Payment>>();
                 foreach (var record in records)
                 {
                     var data = record.Split(' ');
                     var employeeId = int.Parse(data[0]);
+
                     if (!employees.Any(e => e.Id == employeeId))
                     {
                         var employee = new Employee(int.Parse(data[0]), data[1], data[2]);
@@ -69,6 +84,7 @@ namespace Homework2
                     {
                         payments[employeeId] = new List<Payment>();
                     }
+
                     payments[employeeId].Add(new Payment(Decimal.Parse(data[3]), DateTime.Parse(data[4])));
                 }
             }
