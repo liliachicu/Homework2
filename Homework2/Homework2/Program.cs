@@ -61,8 +61,10 @@ namespace Homework2
                     p.Date
                 };
             var tralalala = joinQuery.GroupBy(o => o.Date.Year).OrderBy(g => g.Key)
-                                     .Select(g => new { Year = g.Key, Month = g.GroupBy(o => o.Date.Month).OrderBy(o => o.Key) })
-                                     .Select(g => new { });
+                                     .Select(g => new { Year = g.Key, Trimester = g.GroupBy(o => GetQuarter(o.Date)).OrderBy(o => o.Key) })
+                                     .Select(u => new { Year = u.Year, Trimister = u.Trimester, Average = u.Trimester.Average(o => o) };
+                                     //Average(x=>x.Amount)};
+                                     
         }
         public static int GetQuarter(DateTime date)
         {
