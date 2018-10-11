@@ -48,21 +48,35 @@ namespace Homework2
             transposing.Transpose(input);
             var employeeReport = transposing.employees;
             var paymentReport = transposing.payments;
+            var resultOfPaymens= paymentReport.Values.SelectMany(x => x.Select(y => y));
             var joinQuery =
                 from e in employeeReport
-                join p in paymentReport on e.Id equals p.Key
+                join p in resultOfPaymens on e.Id equals p.IDEmployee
                 select new
                 {
                     e.Id,
                     e.FirstName,
                     e.LastName,
-                    p.Value
+                    p.Amount,
+                    p.Date
                 };
-      
-
+            var tralalala = joinQuery.GroupBy(o => o.Date.Year).OrderBy(g => g.Key)
+                                     .Select(g => new { Year = g.Key, Month = g.GroupBy(o => o.Date.Month).OrderBy(o => o.Key) })
+                                     .Select(g => new { });
+        }
+        public static int GetQuarter(DateTime date)
+        {
+            if (date.Month >= 4 && date.Month <= 6)
+                return 1;
+            else if (date.Month >= 7 && date.Month <= 9)
+                return 2;
+            else if (date.Month >= 10 && date.Month <= 12)
+                return 3;
+            else
+                return 4;
         }
 
-       public class DataTransposing
+        public class DataTransposing
         {
             public List<Employee> employees = new List<Employee>();
             public Dictionary<int, ICollection<Payment>> payments = new Dictionary<int, ICollection<Payment>>();
@@ -85,7 +99,7 @@ namespace Homework2
                         payments[employeeId] = new List<Payment>();
                     }
 
-                    payments[employeeId].Add(new Payment(Decimal.Parse(data[3]), DateTime.Parse(data[4])));
+                    payments[employeeId].Add(new Payment(employeeId, Decimal.Parse(data[3]), DateTime.Parse(data[4])));
                 }
             }
         }
