@@ -43,7 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractValueReader.cs" />
+    <Compile Include="ConsoleReader.cs" />
     <Compile Include="DataModel.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="FileValueReader.cs" />
+    <Compile Include="Interfaces\IFileValueReader.cs" />
+    <Compile Include="Interfaces\IConsoleReader.cs" />
+    <Compile Include="Interfaces\IInputProvider.cs" />
+    <Compile Include="Payment.cs" />
     <Compile Include="Payments.cs" />
     <Compile Include="People.cs" />
     <Compile Include="Program.cs" />
@@ -53,4 +61,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>
