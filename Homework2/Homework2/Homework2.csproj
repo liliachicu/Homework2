@@ -52,8 +52,6 @@
     <Compile Include="Interfaces\IConsoleReader.cs" />
     <Compile Include="Interfaces\IInputProvider.cs" />
     <Compile Include="Payment.cs" />
-    <Compile Include="Payments.cs" />
-    <Compile Include="People.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

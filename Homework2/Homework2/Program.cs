@@ -60,50 +60,34 @@ namespace Homework2
                     p.Amount,
                     p.Date
                 };
+            var reportData = new List<object>();
             var tralalala = joinQuery.GroupBy(o => o.Date.Year).OrderBy(g => g.Key)
-                                     .Select(g => new { Year = g.Key, Trimester = g.GroupBy(o => GetQuarter(o.Date)).OrderBy(o => o.Key) })
-                                     .Select(u => new { Year = u.Year, Trimister = u.Trimester, Average = u.Trimester.Average(o => o) };
-                                     //Average(x=>x.Amount)};
+                                     .Select(g => new { Year = g.Key, Trimester = g.GroupBy(o => GetQuarter(o.Date)).OrderBy(o => o.Key) });
                                      
+            foreach (var item in tralalala)
+            {
+                foreach (var trimester in item.Trimester)
+                {
+                    reportData.Add(new
+                    {
+                        Year = item.Year,
+                        Trimester = trimester.Key,
+                        Average = trimester.Average(o => o.Amount)
+                    });
+                }
+            }
         }
+        
         public static int GetQuarter(DateTime date)
         {
-            if (date.Month >= 4 && date.Month <= 6)
+            if (date.Month >= 1 && date.Month <= 3)
                 return 1;
-            else if (date.Month >= 7 && date.Month <= 9)
+            else if (date.Month >= 4 && date.Month <= 6)
                 return 2;
-            else if (date.Month >= 10 && date.Month <= 12)
+            else if (date.Month >= 7 && date.Month <= 9)
                 return 3;
             else
                 return 4;
-        }
-
-        public class DataTransposing
-        {
-            public List<Employee> employees = new List<Employee>();
-            public Dictionary<int, ICollection<Payment>> payments = new Dictionary<int, ICollection<Payment>>();
-            public void Transpose(string input)
-            {
-                var records = input.Split(';');
-                foreach (var record in records)
-                {
-                    var data = record.Split(' ');
-                    var employeeId = int.Parse(data[0]);
-
-                    if (!employees.Any(e => e.Id == employeeId))
-                    {
-                        var employee = new Employee(int.Parse(data[0]), data[1], data[2]);
-                        employees.Add(employee);
-                    }
-
-                    if (!payments.ContainsKey(employeeId))
-                    {
-                        payments[employeeId] = new List<Payment>();
-                    }
-
-                    payments[employeeId].Add(new Payment(employeeId, Decimal.Parse(data[3]), DateTime.Parse(data[4])));
-                }
-            }
         }
     }
 }
