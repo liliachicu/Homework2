@@ -59,6 +59,7 @@
     <Compile Include="ReportConsole.cs" />
     <Compile Include="ReportFile.cs" />
     <Compile Include="Trimester.cs" />
+    <Compile Include="Validations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
