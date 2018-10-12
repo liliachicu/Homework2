@@ -52,10 +52,12 @@
     <Compile Include="Interfaces\IFileValueReader.cs" />
     <Compile Include="Interfaces\IConsoleReader.cs" />
     <Compile Include="Interfaces\IInputProvider.cs" />
+    <Compile Include="IReport.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report.cs" />
+    <Compile Include="ReportConsole.cs" />
+    <Compile Include="ReportFile.cs" />
     <Compile Include="Trimester.cs" />
   </ItemGroup>
   <ItemGroup>

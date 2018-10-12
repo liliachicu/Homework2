@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Homework2
 {
-    public class Report
+    public class ReportConsole : IReport
     {
         public int Year { get; set; }
         public int Trimester { get; set; }
         public decimal Average { get; set; }
-        public void PrintConsoleReport(List<Report> reportData)
+        public void PrintConsoleReport(List<IReport> reportData)
         {
             foreach (var item in reportData)
             {

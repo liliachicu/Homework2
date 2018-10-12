@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +13,8 @@ namespace Homework2
             var consoleReader = new ConsoleReader();
             var fileReader = new FileValueReader();
             var transposing = new DataTransposing();
-            var report = new Report();
+            var reportConsole = new ReportConsole();
+            var reportFile = new ReportFile();
 
             string input = string.Empty;
 
@@ -32,7 +32,7 @@ namespace Homework2
                         //var length = args.Length - 1;
                         //var values = new string[length];
                         //Array.Copy(args, 1, values, 0, args.Length - 1);
-                        input = args[1].Trim(new char[] { '"' });
+                        input = args[1].Trim(new char[] {'"'});
                         //string.Join(" ", values);
                         break;
 
@@ -61,7 +61,7 @@ namespace Homework2
                     p.Amount,
                     p.Date
                 };
-            var reportData = new List<Report>();
+            var reportData = new List<IReport>();
             var trimesterGroup = joinQuery.GroupBy(o => o.Date.Year).OrderBy(g => g.Key)
                                      .Select(g => new { Year = g.Key, Trimester = g.GroupBy(o => Trimester.GetQuarter(o.Date)).OrderBy(o => o.Key) });
                                      
@@ -69,7 +69,7 @@ namespace Homework2
             {
                 foreach (var trimester in item.Trimester)
                 {
-                    reportData.Add(new Report
+                    reportData.Add(new ReportConsole
                     {
                         Year = item.Year,
                         Trimester = trimester.Key,
@@ -77,9 +77,9 @@ namespace Homework2
                     });
                 }
             }
-            report.PrintConsoleReport(reportData);
+            reportConsole.PrintConsoleReport(reportData);
+            reportFile.PrintConsoleReport(reportData);
             Console.ReadKey();
-            
         }
     }
 }
