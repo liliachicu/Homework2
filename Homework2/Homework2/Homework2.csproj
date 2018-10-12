@@ -46,6 +46,7 @@
     <Compile Include="AbstractValueReader.cs" />
     <Compile Include="ConsoleReader.cs" />
     <Compile Include="DataModel.cs" />
+    <Compile Include="DataTransposing.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="FileValueReader.cs" />
     <Compile Include="Interfaces\IFileValueReader.cs" />
@@ -54,6 +55,8 @@
     <Compile Include="Payment.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report.cs" />
+    <Compile Include="Trimester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

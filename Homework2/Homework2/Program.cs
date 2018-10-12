@@ -14,6 +14,7 @@ namespace Homework2
             var consoleReader = new ConsoleReader();
             var fileReader = new FileValueReader();
             var transposing = new DataTransposing();
+            var report = new Report();
 
             string input = string.Empty;
 
@@ -60,15 +61,15 @@ namespace Homework2
                     p.Amount,
                     p.Date
                 };
-            var reportData = new List<object>();
-            var tralalala = joinQuery.GroupBy(o => o.Date.Year).OrderBy(g => g.Key)
-                                     .Select(g => new { Year = g.Key, Trimester = g.GroupBy(o => GetQuarter(o.Date)).OrderBy(o => o.Key) });
+            var reportData = new List<Report>();
+            var trimesterGroup = joinQuery.GroupBy(o => o.Date.Year).OrderBy(g => g.Key)
+                                     .Select(g => new { Year = g.Key, Trimester = g.GroupBy(o => Trimester.GetQuarter(o.Date)).OrderBy(o => o.Key) });
                                      
-            foreach (var item in tralalala)
+            foreach (var item in trimesterGroup)
             {
                 foreach (var trimester in item.Trimester)
                 {
-                    reportData.Add(new
+                    reportData.Add(new Report
                     {
                         Year = item.Year,
                         Trimester = trimester.Key,
@@ -76,18 +77,9 @@ namespace Homework2
                     });
                 }
             }
-        }
-        
-        public static int GetQuarter(DateTime date)
-        {
-            if (date.Month >= 1 && date.Month <= 3)
-                return 1;
-            else if (date.Month >= 4 && date.Month <= 6)
-                return 2;
-            else if (date.Month >= 7 && date.Month <= 9)
-                return 3;
-            else
-                return 4;
+            report.PrintConsoleReport(reportData);
+            Console.ReadKey();
+            
         }
     }
 }
