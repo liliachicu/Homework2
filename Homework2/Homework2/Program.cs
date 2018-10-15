@@ -42,7 +42,7 @@ namespace Homework2
                         throw new ArgumentOutOfRangeException(nameof(args), "Unknown source flag");
                 }
             }
-            var report = reportGenerator.GenerateReport(input);
+            List<IReport> report = reportGenerator.GenerateReport(input);
             Show += reportConsole.PrintReport;
             Show += reportFile.PrintReport;
             Show(report);
