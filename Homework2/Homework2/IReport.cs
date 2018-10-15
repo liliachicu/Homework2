@@ -8,6 +8,6 @@ namespace Homework2
         int Trimester { get; set; }
         int Year { get; set; }
 
-        void PrintConsoleReport(List<IReport> reportData);
+        void PrintReport(List<IReport> reportData);
     }
 }

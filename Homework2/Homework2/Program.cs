@@ -8,6 +8,7 @@ namespace Homework2
 {
     partial class Program
     {
+        public static event Action<List<IReport>> Show;
         static void Main(string[] args)
         {
             var consoleReader = new ConsoleReader();
@@ -77,8 +78,11 @@ namespace Homework2
                     });
                 }
             }
-            reportConsole.PrintConsoleReport(reportData);
-            reportFile.PrintConsoleReport(reportData);
+            Show += reportConsole.PrintReport;
+            Show += reportFile.PrintReport;
+            Show(reportData);
+            //reportConsole.PrintReport(reportData);
+            //reportFile.PrintReport(reportData);
             Console.ReadKey();
         }
     }

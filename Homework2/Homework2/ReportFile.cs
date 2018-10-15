@@ -9,7 +9,7 @@ namespace Homework2
         public int Trimester { get; set; }
         public int Year { get; set; }
 
-        public void PrintConsoleReport(List<IReport> reportData)
+        public void PrintReport(List<IReport> reportData)
         {
             using (StreamWriter writer = new StreamWriter(@"C:\Projects L\Project 1\Homework2\Homework2\report.txt"))
             {

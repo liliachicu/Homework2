@@ -11,7 +11,7 @@ namespace Homework2
         public int Year { get; set; }
         public int Trimester { get; set; }
         public decimal Average { get; set; }
-        public void PrintConsoleReport(List<IReport> reportData)
+        public void PrintReport(List<IReport> reportData)
         {
             foreach (var item in reportData)
             {
