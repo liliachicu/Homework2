@@ -46,7 +46,6 @@
     <Compile Include="AbstractValueReader.cs" />
     <Compile Include="ConsoleReader.cs" />
     <Compile Include="DataModel.cs" />
-    <Compile Include="DataTransposing.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="FileValueReader.cs" />
     <Compile Include="Interfaces\IFileValueReader.cs" />
@@ -58,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportConsole.cs" />
     <Compile Include="ReportFile.cs" />
+    <Compile Include="ReportGenerator.cs" />
     <Compile Include="Trimester.cs" />
     <Compile Include="Validations.cs" />
   </ItemGroup>

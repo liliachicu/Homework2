@@ -2,7 +2,7 @@
 
 namespace Homework2
 {
-    class Payment
+    public class Payment
     {
         public int IDEmployee { get;}
         public decimal Amount { get; }

@@ -2,7 +2,7 @@
 
 namespace Homework2
 {
-    class Employee
+    public class Employee
     {
         public Employee(int id, string firstName, string lastName)
         {
