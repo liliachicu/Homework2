@@ -20,6 +20,9 @@ namespace Homework2
 
                     if (!employees.Any(e => e.Id == employeeId))
                     {
+                        int resultId;
+                        bool res = int.TryParse(data[0], out resultId);
+                        if (res == false) { Console.WriteLine("Id is not a number"); }
                         var employee = new Employee(int.Parse(data[0]), data[1], data[2]);
                         employees.Add(employee);
                     }
