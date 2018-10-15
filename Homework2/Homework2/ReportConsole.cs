@@ -16,7 +16,7 @@ namespace Homework2
             foreach (var item in reportData)
             {
                 Console.WriteLine(item.Year);
-                Console.WriteLine($"Trimester {item.Trimester}: {item.Average}");
+                Console.WriteLine($"Trimester {item.Trimester}: {String.Format("{0:0.000}",item.Average)}");
             }
         }
     }
