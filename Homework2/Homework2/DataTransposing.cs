@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Homework2
@@ -14,16 +15,20 @@ namespace Homework2
             {
                 var records = input.Split(';');
                 foreach (var record in records)
-                {
+                { 
                     var data = record.Split(' ');
-                    var employeeId = int.Parse(data[0]);
-
+                    int employeeId;
+                    decimal parsedAmount;
+                    DateTime parsedData;
+                    bool resInt = int.TryParse(data[0], out employeeId);
+                    if (resInt == false) throw new Exception("Id must be an integer value");
+                    bool resDec = decimal.TryParse(data[3], out parsedAmount);
+                    if (resDec == false) throw new Exception("Amount must be a decimal value");
+                    bool resData = DateTime.TryParse(data[4], out parsedData);
+                    if (resData == false) throw new Exception("DateTime must be a Date Time value");
                     if (!employees.Any(e => e.Id == employeeId))
                     {
-                        int resultId;
-                        bool res = int.TryParse(data[0], out resultId);
-                        if (res == false) { Console.WriteLine("Id is not a number"); }
-                        var employee = new Employee(int.Parse(data[0]), data[1], data[2]);
+                        var employee = new Employee(employeeId, data[1], data[2]);
                         employees.Add(employee);
                     }
 
@@ -32,7 +37,7 @@ namespace Homework2
                         payments[employeeId] = new List<Payment>();
                     }
 
-                    payments[employeeId].Add(new Payment(employeeId, Decimal.Parse(data[3]), DateTime.Parse(data[4])));
+                    payments[employeeId].Add(new Payment(employeeId, parsedAmount, parsedData));
                 }
             }
         }

@@ -10,13 +10,13 @@ namespace Homework2
             {
                 throw new ArgumentException(nameof(id), "ID can not be a negative number");
             }
-            if (/*string.IsNullOrWhiteSpace(firstName) || */!Validations.IsAllLetters(firstName))
+            if (string.IsNullOrWhiteSpace(firstName) && !Validations.IsAllLetters(firstName))
             {
-                throw new ArgumentException(nameof(firstName), "The first name cannot be null or empty.");
+                throw new ArgumentException(nameof(firstName), "The first name cannot be null or empty, and should contain only letters");
             }
-            if (/*string.IsNullOrWhiteSpace(lastName) ||*/ !Validations.IsAllLetters(lastName))
+            if (string.IsNullOrWhiteSpace(lastName) && !Validations.IsAllLetters(lastName))
             {
-                throw new ArgumentException(nameof(lastName), "The last name cannot be null or empty.");
+                throw new ArgumentException(nameof(lastName), "The last name cannot be null or empty, and should contain only letters");
             }
             Id = id;
             FirstName = firstName;
