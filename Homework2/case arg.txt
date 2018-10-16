@@ -1,0 +1,5 @@
+//var length = args.Length - 1;
+                        //var values = new string[length];
+                        //Array.Copy(args, 1, values, 0, args.Length - 1);
+                        input = args[1].Trim(new char[] {'"'});
+                        //string.Join(" ", values);
