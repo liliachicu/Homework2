@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Homework2
 {
-    public interface IReport
+    public interface IReport: IEquatable<IReport>
     {
         decimal Average { get; set; }
         int Trimester { get; set; }
