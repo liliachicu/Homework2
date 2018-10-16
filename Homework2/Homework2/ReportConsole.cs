@@ -11,6 +11,12 @@ namespace Homework2
         public int Year { get; set; }
         public int Trimester { get; set; }
         public decimal Average { get; set; }
+
+        public bool Equals(IReport other)
+        {
+            return Year == other.Year && Trimester == other.Trimester && Average == other.Average;
+        }
+
         public void PrintReport(List<IReport> reportData)
         {
             foreach (var item in reportData)
