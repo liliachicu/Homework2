@@ -8,15 +8,11 @@ namespace Homework2
 {
     partial class Program
     {
-        public static event Action<List<IReport>> Show;
+       
         static void Main(string[] args)
         {
             var consoleReader = new ConsoleReader();
             var fileReader = new FileValueReader();
-            var reportConsole = new ReportConsole();
-            var reportFile = new ReportFile();
-            var reportGenerator = new ReportGenerator();
-
             string input = string.Empty;
 
             if (args.Length == 0)
@@ -42,10 +38,15 @@ namespace Homework2
                         throw new ArgumentOutOfRangeException(nameof(args), "Unknown source flag");
                 }
             }
-            List<IReport> report = reportGenerator.GenerateReport(input);
-            Show += reportConsole.PrintReport;
-            Show += reportFile.PrintReport;
-            Show(report);
+           
+            var parseInput = new InputParser(new DataModel());
+            var reportData = new ReportData(parseInput);
+            var a = reportData.GenerateReport(input);
+            var report = new ReportGenerator();
+
+            report.reportShow += report.PrintConsole;
+            report.reportShow += report.PrintFile;
+            report.InvokeEvent(a);
             Console.ReadKey();
         }
     }

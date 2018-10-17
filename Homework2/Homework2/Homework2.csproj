@@ -51,13 +51,14 @@
     <Compile Include="Interfaces\IFileValueReader.cs" />
     <Compile Include="Interfaces\IConsoleReader.cs" />
     <Compile Include="Interfaces\IInputProvider.cs" />
-    <Compile Include="IReport.cs" />
+    <Compile Include="Interfaces\IReport.cs" />
+    <Compile Include="Interfaces\IReportModel.cs" />
+    <Compile Include="ParseInput.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportConsole.cs" />
-    <Compile Include="ReportFile.cs" />
     <Compile Include="ReportGenerator.cs" />
+    <Compile Include="ReportData.cs" />
     <Compile Include="Trimester.cs" />
     <Compile Include="Validations.cs" />
   </ItemGroup>

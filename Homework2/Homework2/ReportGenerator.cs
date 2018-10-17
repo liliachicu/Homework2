@@ -1,50 +1,44 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Homework2
 {
-    public class ReportGenerator
+    public delegate void reportSync(List<IReportModel> reportData);
+    public class ReportGenerator : IReport, IReportModel
     {
-        public ParseInput Transposing { get; set; }
-        public ReportGenerator(ParseInput transposing)
+        public event reportSync reportShow;
+        public decimal Average { get; set; }
+        public int Trimester { get; set; }
+        public int Year { get; set; }
+
+        public bool Equals(IReportModel other)
         {
-            Transposing = transposing;
+            return Year == other.Year && Trimester == other.Trimester && Average == other.Average;
         }
-        public List<IReport> GenerateReport(string input)
+ 
+        public void PrintConsole(List<IReportModel> reportData)
         {
-            Transposing.Parse(input);
-            var employeeReport = Transposing.Model.Employees;
-            var paymentReport = Transposing.Model.Payments;
-            var resultOfPaymens = paymentReport.Values.SelectMany(x => x.Select(y => y));
-            var joinQuery =
-            from e in employeeReport
-            join p in resultOfPaymens on e.Id equals p.IDEmployee
-            select new
+            using (StreamWriter writer = new StreamWriter(@"C:\Projects L\Project 1\Homework2\Homework2\report.txt"))
             {
-                e.Id,
-                e.FirstName,
-                e.LastName,
-                p.Amount,
-                p.Date
-            };
-            var reportData = new List<IReport>();
-            var trimesterGroup = joinQuery.GroupBy(o => o.Date.Year).OrderBy(g => g.Key)
-                                 .Select(g => new { Year = g.Key, Trimester = g.GroupBy(o => Trimester.GetQuarter(o.Date)).OrderBy(o => o.Key) });
-                                     
-            foreach (var item in trimesterGroup)
-            {
-                foreach (var trimester in item.Trimester)
+                foreach (var item in reportData)
                 {
-                    reportData.Add(new ReportConsole
-                    {
-                        Year = item.Year,
-                        Trimester = trimester.Key,
-                        Average = trimester.Average(o => o.Amount)
-                    });
+                    writer.WriteLine($"{item.Year}");
+                    writer.WriteLine($"Trimester {item.Trimester}: {item.Average}");
                 }
             }
-            return reportData;
         }
-
+        public void PrintFile(List<IReportModel> reportData)
+        {
+            foreach (var item in reportData)
+            {
+                Console.WriteLine(item.Year);
+                Console.WriteLine($"Trimester {item.Trimester}: {String.Format("{0:0.000}", item.Average)}");
+            }
+        }
+        public void InvokeEvent(List<IReportModel> reportData)
+        {
+            reportShow(reportData);
+        }
     }
 }

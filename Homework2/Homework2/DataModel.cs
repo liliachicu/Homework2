@@ -5,7 +5,7 @@ namespace Homework2
 {
     public class DataModel
     {
-        public List<Employee> Employees { get; set; }
-        public Dictionary<int, ICollection<Payment>> Payments { get; set; }
+        public List<Employee> Employees { get; set; } = new List<Employee>();
+        public Dictionary<int, ICollection<Payment>> Payments { get; set; } = new Dictionary<int, ICollection<Payment>>();
     }
 }

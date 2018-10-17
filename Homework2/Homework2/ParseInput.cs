@@ -4,10 +4,10 @@ using System.Linq;
 
 namespace Homework2
 {
-    public class ParseInput
+    public class InputParser
         {
             public DataModel Model { get; set; }
-            public ParseInput(DataModel model)
+            public InputParser(DataModel model)
             {
                 Model = model;
             }
