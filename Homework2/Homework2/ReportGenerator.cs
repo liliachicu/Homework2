@@ -5,12 +5,16 @@ namespace Homework2
 {
     public class ReportGenerator
     {
+        public ParseInput Transposing { get; set; }
+        public ReportGenerator(ParseInput transposing)
+        {
+            Transposing = transposing;
+        }
         public List<IReport> GenerateReport(string input)
         {
-            var transposing = new DataModel();
-            transposing.Model(input);
-            var employeeReport = transposing.employees;
-            var paymentReport = transposing.payments;
+            Transposing.Parse(input);
+            var employeeReport = Transposing.Model.Employees;
+            var paymentReport = Transposing.Model.Payments;
             var resultOfPaymens = paymentReport.Values.SelectMany(x => x.Select(y => y));
             var joinQuery =
             from e in employeeReport
