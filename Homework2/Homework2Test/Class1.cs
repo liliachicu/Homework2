@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Homework2;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Homework2Test
 {
@@ -11,7 +15,6 @@ namespace Homework2Test
         [Test]
         public void GenerateReport_Should_Return_Report()
         {
-
             var parseInput = new InputParser(new DataModel());
             var reportData = new ReportData(parseInput);
             var actual = reportData.GenerateReport("1 Lilia Chicu 5000 10/10/2018;2 Dorin Mocan 4500 09/10/2018;3 Eugen Stratulat 5005 09/01/2017;4 Dorina Dumbrava 6000 08/09/2017");
@@ -41,14 +44,35 @@ namespace Homework2Test
         {
             var parseInput = new InputParser(new DataModel());
             var reportData = new ReportData(parseInput);
-            var actual = reportData.GenerateReport("1 Lilia Chicu 5000 10/10/2018;2 Dorin Mocan 4500 09/10/2018;3 Eugen Stratulat 5005 09/01/2017;4 Dorina Dumbrava 6000 08/09/2017");
+            var actual = reportData.GenerateReport("1 Lilia Chicu 5000 10/10/2018;2 Dorin Mocan 4500 09/10/2018;" +
+                "3 Eugen Stratulat 5005 09/01/2017;4 Dorina Dumbrava 6000 08/09/2017");
             var expected = new ReportGenerator
             {
                 Average = 5502.5M,
                 Year = 2017,
                 Trimester = 3
             };
+           // Assert.IsTrue(actual.Contains(expected));
+
             actual.Should().Contain(expected);
         }
+        //[Test]
+        //public void EqualsTest()
+        //{
+        //    var actual= new ReportGenerator
+        //    {
+        //        Average = 5502.5M,
+        //        Year = 2017,
+        //        Trimester = 3
+        //    };
+        //    var expected = new ReportGenerator
+        //    {
+        //        Average = 5502.5M,
+        //        Year = 2017,
+        //        Trimester = 3
+        //    };
+        //    Assert.AreEqual(actual, expected);
+        //}
     }
 }
+

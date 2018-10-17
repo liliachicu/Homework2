@@ -47,6 +47,7 @@ namespace Homework2
             report.reportShow += report.PrintConsole;
             report.reportShow += report.PrintFile;
             report.InvokeEvent(reportModel);
+          
             Console.ReadKey();
         }
     }

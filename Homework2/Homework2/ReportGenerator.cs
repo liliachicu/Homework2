@@ -16,6 +16,7 @@ namespace Homework2
         {
             return Year == other.Year && Trimester == other.Trimester && Average == other.Average;
         }
+
  
         public void PrintConsole(List<IReportModel> reportData)
         {
