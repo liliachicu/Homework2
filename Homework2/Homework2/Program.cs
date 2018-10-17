@@ -41,12 +41,12 @@ namespace Homework2
            
             var parseInput = new InputParser(new DataModel());
             var reportData = new ReportData(parseInput);
-            var a = reportData.GenerateReport(input);
+            var reportModel = reportData.GenerateReport(input);
             var report = new ReportGenerator();
 
             report.reportShow += report.PrintConsole;
             report.reportShow += report.PrintFile;
-            report.InvokeEvent(a);
+            report.InvokeEvent(reportModel);
             Console.ReadKey();
         }
     }
